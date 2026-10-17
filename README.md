@@ -1,1 +1,0 @@
-# cake_name_trainer
