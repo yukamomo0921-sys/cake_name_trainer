@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#dff4f7">
+<title>ケーキおぼえ帳</title>
+<style>
+:root{--blue:#bde8ef;--blue2:#e7f7f9;--pink:#f4d5df;--purple:#dcd4f3;--navy:#354a68;--ink:#34445c;--muted:#718097;--white:#fff;--line:#d9e5eb;--green:#d9f2df;--red:#f9dfe2;--shadow:0 8px 24px #55738b12}
+*{box-sizing:border-box}body{margin:0;background:#f7fbfc;color:var(--ink);font-family:var(--app-font,system-ui),-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:14px;padding:11px 15px;font-weight:700;color:var(--navy);background:var(--blue2);transition:transform .12s,opacity .12s}button:active{transform:scale(.98)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--navy);color:white}.pink{background:var(--pink)}.purple{background:var(--purple)}.danger{background:var(--red);color:#8d3d50}.soft{background:#fff;border:1px solid var(--line)}
+header{padding:22px 18px 15px;background:linear-gradient(135deg,#e1f6f8,#f8e9ef);border-bottom:1px solid #e1ebef}
+.wrap{max-width:1000px;margin:auto}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:25px;box-shadow:var(--shadow)}h1{font-size:22px;margin:0;color:var(--navy)}.sub{font-size:12px;color:var(--muted);margin-top:3px}.tabs{display:flex;gap:8px;overflow:auto;padding:14px 0 0}.tab{white-space:nowrap;background:#ffffffa8;border:1px solid #fff}.tab.active{background:var(--navy);color:white}
+main{max-width:1000px;margin:auto;padding:18px 14px 40px}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}h2{font-size:18px;margin:0;color:var(--navy)}h3{font-size:15px;margin:0 0 8px;color:var(--navy)}.muted{color:var(--muted);font-size:13px}.hidden{display:none!important}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat{background:var(--blue2);border-radius:16px;padding:12px;text-align:center}.stat:nth-child(2){background:#fff0f4}.stat:nth-child(3){background:#f0edfc}.stat b{display:block;font-size:22px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.mode-switch{display:flex;gap:8px;flex-wrap:wrap}.mode-switch button.selected{outline:2px solid var(--navy);background:var(--blue)}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.timer{font-size:13px;font-weight:800;color:var(--navy);background:#f0edfc;border-radius:999px;padding:8px 12px;font-variant-numeric:tabular-nums}.quiz-image{width:min(100%,420px);aspect-ratio:4/3;object-fit:contain;background:#f6fafb;border-radius:18px;border:1px solid var(--line);display:block;margin:0 auto 14px}.question-name{text-align:center;font-size:24px;font-weight:800;color:var(--navy);margin:22px 0}.answer-row{display:flex;gap:8px;max-width:560px;margin:0 auto}.answer-row input{min-width:0;flex:1;border:1px solid #cbdce4;border-radius:13px;padding:12px 14px;outline-color:#83cbd8}.success-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;animation:fadeIn .08s ease-out}.success-check{font-size:clamp(88px,22vw,160px);line-height:1;color:#45ad72;text-shadow:0 5px 0 #dff4e5}.success-time{font-size:18px;font-weight:800;color:var(--navy)}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.feedback{text-align:center;font-size:18px;font-weight:800;padding:12px;border-radius:14px;margin:12px 0}.feedback.good{background:var(--green);color:#236943}.feedback.bad{background:var(--red);color:#943b4c}.center{text-align:center}.choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.choice{padding:7px;background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden}.choice img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#f6fafb;display:block}.choice span{display:block;font-size:12px;color:var(--muted);margin-top:5px}.choice.correct{outline:3px solid #68bd86}.choice.wrong{outline:3px solid #e58b9a}.form-grid{display:grid;grid-template-columns:180px 1fr;gap:15px}.photo-preview{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f6fafb;border:1px dashed #b9ced8;border-radius:16px}.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input[type=text]{width:100%;padding:11px 12px;border:1px solid #cadbe2;border-radius:12px}.checkline{display:flex;align-items:center;gap:8px}.checkline input{width:18px;height:18px}.cake-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.cake-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:white}.cake-card img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f6fafb;display:block}.cake-card .body{padding:10px}.cake-card strong{display:block;overflow-wrap:anywhere}.cake-card .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.cake-card .actions button{font-size:12px;padding:8px 10px}.archive{background:#f5f2fc}.empty{border:1px dashed #c6d8e0;border-radius:16px;text-align:center;padding:28px 15px;color:var(--muted)}.notice{background:#fff7e6;border:1px solid #f3dfb3;border-radius:13px;padding:11px 13px;font-size:12px;color:#77603b;margin-bottom:14px}
+@media(max-width:600px){main{padding:13px 10px 30px}.panel{padding:14px;border-radius:18px}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}.cake-list{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:1fr}.photo-preview{max-width:220px}.stats{gap:6px}.stat{padding:10px 5px}.stat b{font-size:19px}.answer-row{flex-direction:column}.answer-row button{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="brand"><div class="logo">🍰</div><div><h1>ケーキおぼえ帳</h1><div class="sub">お店のケーキを、たのしく覚えよう。</div></div></div>
+ <nav class="tabs">
+  <button class="tab active" data-page="quiz">🎯 練習する</button>
+  <button class="tab" data-page="manage">🍓 ケーキ登録</button>
+  <button class="tab" data-page="stats">📊 学習記録</button>
+  <button class="tab" data-page="settings">⚙️ 設定</button>
+ </nav>
+</div></header>
+<main>
+<section id="page-quiz">
+ <div class="stats">
+  <div class="stat"><b id="totalCount">0</b><span>登録ケーキ</span></div>
+  <div class="stat"><b id="activeCount">0</b><span>練習対象</span></div>
+  <div class="stat"><b id="accuracy">—</b><span>正答率</span></div>
+ </div>
+ <div class="panel">
+  <div class="section-head"><h2>どっちの練習にする？</h2><span class="muted">季節限定はアーカイブでお休み</span></div>
+  <div class="mode-switch">
+   <button id="mode1" class="selected">① 写真 → 名前を入力</button>
+   <button id="mode2">② 名前 → 写真を選ぶ</button>
+  </div>
+ </div>
+ <div class="panel">
+  <div class="quiz-top"><h2 id="quizTitle">写真を見て名前を入力</h2><span class="timer" id="timer">⏱ 0.0 秒</span></div>
+  <div id="quizContent">
+   <div class="empty">まずは「ケーキ登録」から写真と名前を登録してね 🍰</div>
+  </div>
+ </div>
+</section>
+<section id="page-manage" class="hidden">
+ <div class="panel">
+  <div class="section-head"><h2 id="formTitle">ケーキを登録</h2><span class="muted">写真・名前・隙間材の可否</span></div>
+  <form id="cakeForm">
+   <div class="form-grid">
+    <div><img id="photoPreview" class="photo-preview" alt="写真プレビュー"><div class="field" style="margin-top:9px"><label for="photoInput">ケーキの写真</label><input id="photoInput" type="file" accept="image/*"></div></div>
+    <div>
+     <div class="field"><label for="cakeName">ケーキの名前 *</label><input id="cakeName" type="text" maxlength="100" placeholder="例：いちごのショートケーキ" required></div>
+     <div class="field"><label>隙間材の可否</label><label class="checkline"><input id="gapMaterial" type="checkbox"> 隙間材 OK</label><div class="muted">チェックなし＝不可として記録</div></div>
+     <div class="row"><button class="primary" type="submit" id="saveCake">登録する</button><button class="soft hidden" type="button" id="cancelEdit">編集をやめる</button></div>
+    </div>
+   </div>
+  </form>
+ </div>
+ <div class="panel">
+  <div class="section-head"><h2>登録済みケーキ</h2><span class="muted" id="listCount">0 件</span></div>
+  <div id="cakeList" class="cake-list"></div>
+ </div>
+ <div class="panel archive">
+  <div class="section-head"><h2>🌙 アーカイブ（季節もの）</h2><span class="muted" id="archiveCount">0 件</span></div>
+  <div id="archiveList" class="cake-list"></div>
+ </div>
+</section>
+<section id="page-stats" class="hidden">
+ <div class="panel"><div class="section-head"><h2>学習記録</h2><button id="clearStats" class="danger">記録をリセット</button></div>
+  <div class="stats"><div class="stat"><b id="attempts">0</b><span>正解した回数</span></div><div class="stat"><b id="avgTime">—</b><span>平均正解時間</span></div><div class="stat"><b id="bestTime">—</b><span>最速タイム</span></div></div>
+  <p class="muted">正解までの時間を記録するよ。①は入力欄に文字を入力している間、タイマーが止まります。</p>
+  <div id="historyList"></div>
+ </div>
+</section>
+<section id="page-settings" class="hidden">
+ <div class="panel">
+  <div class="section-head"><h2>⚙️ 表示設定</h2><span class="muted">この端末のブラウザに保存</span></div>
+  <div class="field"><label for="fontPreset">フォント</label>
+   <select id="fontPreset" style="width:100%;padding:11px 12px;border:1px solid #cadbe2;border-radius:12px;background:white">
+    <option value="">端末の標準フォント</option><option value="system-ui">システム標準（ゴシック）</option><option value="sans-serif">ゴシック体</option><option value="serif">明朝体</option><option value="monospace">等幅フォント</option><option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option><option value="Yu Gothic">游ゴシック</option><option value="Arial Rounded MT Bold">Arial Rounded（対応端末のみ）</option>
+   </select>
+  </div>
+  <div class="field"><label for="customFont">端末にインストールした好きなフォント名</label><input id="customFont" type="text" placeholder="例：フォントの正式名称" maxlength="100"><div class="muted">フォント名を入力すると優先して使うよ。端末やブラウザがそのフォントを利用できる場合に反映されます。</div></div>
+  <div class="row"><button class="primary" id="applyFont">フォントを適用</button><button class="soft" id="resetFont">標準に戻す</button></div>
+  <div class="panel" style="margin:16px 0 0;background:#f7fbfc;box-shadow:none"><h3>プレビュー</h3><div id="fontPreview" style="font-size:22px;padding:12px 0">いちごのショートケーキ 🍰</div><div class="muted">※ フォントファイルをアプリに埋め込まず、端末側で利用可能なフォント名を指定します。</div></div>
+ </div>
+</section>
+</main>
+<div id="successOverlay" class="success-overlay hidden" aria-live="polite"><div class="success-check">✓</div><div class="success-time" id="successTime">正解！</div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const DB_NAME='cake-oboecho-db', STORE='cakes';
+let db, cakes=[], mode=1, editingId=null, pendingPhoto=null, current=null, choices=[], startedAt=0, elapsedBeforePause=0, pausedAt=null, tick=null, answered=false, history=[], decks={1:[],2:[]}, lastQuestionId={1:null,2:null}, overlayTimeout=null;
+const fmt=s=>`${Number(s).toFixed(1)} 秒`;
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+function allCakes(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error);});}
+function putCake(c){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).put(c);r.onsuccess=resolve;r.onerror=()=>reject(r.error);});}
+function delCake(id){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).delete(id);r.onsuccess=resolve;r.onerror=()=>reject(r.error);});}
+function imgURL(blob){return blob?URL.createObjectURL(blob):'';}
+function active(){return cakes.filter(c=>!c.archived&&c.photo);}
+function rand(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+function stopTimer(){if(tick){clearInterval(tick);tick=null;}}
+function elapsed(){if(!startedAt)return 0;return elapsedBeforePause+(pausedAt?0:(performance.now()-startedAt)/1000);}
+function renderTimer(){ $('timer').textContent='⏱ '+fmt(elapsed());}
+function startTimer(){stopTimer();startedAt=performance.now();elapsedBeforePause=0;pausedAt=null;tick=setInterval(renderTimer,100);}
+function pauseTimer(){if(startedAt&&!pausedAt){elapsedBeforePause+=(performance.now()-startedAt)/1000;pausedAt=performance.now();}renderTimer();}
+function resumeTimer(){if(startedAt&&pausedAt){pausedAt=null;startedAt=performance.now();}renderTimer();}
+function resetTimer(){stopTimer();startedAt=0;elapsedBeforePause=0;pausedAt=null;$('timer').textContent='⏱ 0.0 秒';}
+function switchPage(page){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.page===page));['quiz','manage','stats','settings'].forEach(p=>$('page-'+p).classList.toggle('hidden',p!==page));if(page==='manage')renderLists();if(page==='stats')renderStats();if(page==='settings')syncFontSettings();}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));
+$('mode1').onclick=()=>setMode(1);$('mode2').onclick=()=>setMode(2);
+function setMode(m){mode=m;$('mode1').classList.toggle('selected',m===1);$('mode2').classList.toggle('selected',m===2);newQuestion();}
+function updateCounts(){const a=active();$('totalCount').textContent=cakes.length;$('activeCount').textContent=a.length;const done=history.length;$('accuracy').textContent=done?Math.round(history.filter(h=>h.correct).length/done*100)+'%':'—';}
+function nextFromDeck(pool){
+ const key=mode;
+ const validIds=new Set(pool.map(c=>c.id));
+ decks[key]=decks[key].filter(id=>validIds.has(id));
+ if(!decks[key].length){
+  decks[key]=shuffle(pool.map(c=>c.id));
+  if(decks[key].length>1&&decks[key][0]===lastQuestionId[key]){
+   const swap=1+Math.floor(Math.random()*(decks[key].length-1));
+   [decks[key][0],decks[key][swap]]=[decks[key][swap],decks[key][0]];
+  }
+ }
+ const id=decks[key].shift();
+ lastQuestionId[key]=id;
+ return pool.find(c=>c.id===id);
+}
+function newQuestion(){
+ if(overlayTimeout){clearTimeout(overlayTimeout);overlayTimeout=null;}
+ $('successOverlay').classList.add('hidden');
+ resetTimer();answered=false;const pool=active();$('quizTitle').textContent=mode===1?'写真を見て名前を入力':'名前を見て写真を選ぼう';
+ if(!pool.length){$('quizContent').innerHTML='<div class="empty">練習できるケーキがまだないよ。<br>「ケーキ登録」から写真と名前を登録してね 🍰</div>';return;}
+ if(mode===2&&pool.length<8){$('quizContent').innerHTML=`<div class="empty">②の4×2択には、練習対象の写真が8枚必要だよ。<br>今は ${pool.length} 枚。あと ${8-pool.length} 枚登録してね！</div>`;return;}
+ current=nextFromDeck(pool);
+ if(mode===1){
+  $('quizContent').innerHTML=`<img class="quiz-image" id="questionPhoto" alt="問題のケーキ"><div class="answer-row"><input id="answerInput" type="text" autocomplete="off" placeholder="ケーキの名前を入力"><button class="primary" id="checkAnswer">答え合わせ</button></div><div id="feedback"></div><div class="row center" style="justify-content:center;margin-top:10px" id="afterActions"></div>`;
+  $('questionPhoto').src=imgURL(current.photo);
+  const input=$('answerInput');input.addEventListener('focus',pauseTimer);input.addEventListener('blur',resumeTimer);input.addEventListener('keydown',e=>{if(e.key==='Enter')checkTyped();});
+  $('checkAnswer').onclick=checkTyped;startTimer();input.focus();
+ }else{
+  choices=shuffle([current,...shuffle(pool.filter(c=>c.id!==current.id)).slice(0,7)]);
+  $('quizContent').innerHTML=`<div class="question-name">${escapeHTML(current.name)}</div><div class="choices" id="choices"></div><div id="feedback"></div><div class="row" style="justify-content:center;margin-top:10px" id="afterActions"></div>`;
+  choices.forEach(c=>{const b=document.createElement('button');b.className='choice';b.innerHTML=`<img alt="ケーキの写真">`;b.querySelector('img').src=imgURL(c.photo);b.onclick=()=>checkChoice(c,b);$('choices').appendChild(b);});startTimer();
+ }
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function showFeedback(ok,extra=''){
+ if(ok){
+  answered=true;const sec=elapsed();stopTimer();history.unshift({name:current.name,mode,seconds:sec,correct:true,date:new Date().toISOString()});history=history.slice(0,100);
+  $('feedback').className='feedback good';$('feedback').textContent=`〇 正解！ ${fmt(sec)}${extra}`;
+  if(mode===1){
+   const btn=$('checkAnswer');
+   if(btn){btn.textContent='次へ →';btn.onclick=newQuestion;btn.classList.add('primary');}
+   if($('answerInput'))$('answerInput').disabled=true;
+   const area=$('afterActions');if(area)area.innerHTML='';
+  }else{
+   const overlay=$('successOverlay');$('successTime').textContent=`正解！ ${fmt(sec)}`;overlay.classList.remove('hidden');
+   overlayTimeout=setTimeout(()=>{overlay.classList.add('hidden');overlayTimeout=null;newQuestion();},500);
+  }
+ }else{$('feedback').className='feedback bad';$('feedback').textContent='✕ ちがうよ。もう一回チャレンジ！';addAfterActions(false);}
+ updateCounts();
+}
+function addAfterActions(correct){const area=$('afterActions');if(!area)return;area.innerHTML='';if(!correct){const retry=document.createElement('button');retry.className='soft';retry.textContent='やり直し';retry.onclick=()=>{if(mode===1){$('answerInput').value='';$('feedback').innerHTML='';area.innerHTML='';$('answerInput').focus();}else{newQuestion();}};area.appendChild(retry);const reveal=document.createElement('button');reveal.className='pink';reveal.textContent='答えを見る';reveal.onclick=()=>{ $('feedback').className='feedback';$('feedback').textContent='答え：'+current.name;area.innerHTML='';const next=document.createElement('button');next.className='primary';next.textContent='次の問題へ';next.onclick=newQuestion;area.appendChild(next);};area.appendChild(reveal);}else{const next=document.createElement('button');next.className='primary';next.textContent='次の問題へ →';next.onclick=newQuestion;area.appendChild(next);}}
+function normalizeAnswer(value){
+ return String(value).normalize('NFKC')
+  .replace(/[ァ-ヶ]/g,ch=>String.fromCharCode(ch.charCodeAt(0)-0x60))
+  .toLowerCase()
+  .replace(/[\s\p{P}\p{S}\u30FC\uFF70]/gu,'');
+}
+function checkTyped(){if(answered)return;const val=normalizeAnswer($('answerInput').value);const target=normalizeAnswer(current.name);if(!val){$('feedback').className='feedback bad';$('feedback').textContent='名前を入力してね！';return;}if(val===target)showFeedback(true);else showFeedback(false);}
+function checkChoice(c,b){if(answered)return;document.querySelectorAll('.choice').forEach(x=>x.disabled=true);if(c.id===current.id){b.classList.add('correct');showFeedback(true);}else{b.classList.add('wrong');showFeedback(false);}}
+$('photoInput').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/')){alert('画像ファイルを選んでね');return;}pendingPhoto=await compressImage(f);$('photoPreview').src=imgURL(pendingPhoto);});
+function compressImage(file){return new Promise(resolve=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const max=1000,scale=Math.min(1,max/Math.max(im.width,im.height));const cv=document.createElement('canvas');cv.width=Math.round(im.width*scale);cv.height=Math.round(im.height*scale);cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);cv.toBlob(blob=>resolve(blob||file),'image/jpeg',.84);};im.onerror=()=>resolve(file);im.src=fr.result;};fr.onerror=()=>resolve(file);fr.readAsDataURL(file);});}
+$('cakeForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('cakeName').value.trim();if(!name)return;const old=editingId?cakes.find(c=>c.id===editingId):null;const photo=pendingPhoto||old?.photo;if(!photo){alert('写真を選んでね！');return;}const c={id:editingId||crypto.randomUUID(),name,photo,gapMaterial:$('gapMaterial').checked,archived:old?.archived||false,createdAt:old?.createdAt||Date.now()};await putCake(c);await refresh();resetForm();renderLists();newQuestion();});
+function resetForm(){editingId=null;pendingPhoto=null;$('cakeForm').reset();$('photoPreview').removeAttribute('src');$('formTitle').textContent='ケーキを登録';$('saveCake').textContent='登録する';$('cancelEdit').classList.add('hidden');}
+$('cancelEdit').onclick=resetForm;
+function editCake(id){const c=cakes.find(x=>x.id===id);if(!c)return;editingId=id;pendingPhoto=null;$('cakeName').value=c.name;$('gapMaterial').checked=c.gapMaterial;$('photoPreview').src=imgURL(c.photo);$('formTitle').textContent='ケーキを編集';$('saveCake').textContent='変更を保存';$('cancelEdit').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+async function archiveCake(id,archived){const c=cakes.find(x=>x.id===id);if(!c)return;c.archived=archived;await putCake(c);await refresh();renderLists();newQuestion();}
+async function deleteCake(id){const c=cakes.find(x=>x.id===id);if(!c)return;if(!confirm(`「${c.name}」を完全に削除する？この操作は取り消せないよ。`))return;await delCake(id);await refresh();renderLists();newQuestion();}
+function card(c){const el=document.createElement('article');el.className='cake-card';const im=document.createElement('img');im.src=imgURL(c.photo);im.alt=c.name;const body=document.createElement('div');body.className='body';const title=document.createElement('strong');title.textContent=c.name;const meta=document.createElement('div');meta.className='muted';meta.textContent='隙間材：'+(c.gapMaterial?'可':'不可');const actions=document.createElement('div');actions.className='actions';const edit=document.createElement('button');edit.className='soft';edit.textContent='編集';edit.onclick=()=>editCake(c.id);const arch=document.createElement('button');arch.className='purple';arch.textContent=c.archived?'復元':'アーカイブ';arch.onclick=()=>archiveCake(c.id,!c.archived);const del=document.createElement('button');del.className='danger';del.textContent='削除';del.onclick=()=>deleteCake(c.id);actions.append(edit,arch,del);body.append(title,meta,actions);el.append(im,body);return el;}
+function renderLists(){const live=cakes.filter(c=>!c.archived),arch=cakes.filter(c=>c.archived);$('cakeList').innerHTML='';$('archiveList').innerHTML='';live.forEach(c=>$('cakeList').appendChild(card(c)));arch.forEach(c=>$('archiveList').appendChild(card(c)));$('listCount').textContent=live.length+' 件';$('archiveCount').textContent=arch.length+' 件';if(!live.length)$('cakeList').innerHTML='<div class="empty" style="grid-column:1/-1">まだ登録がないよ 🍓</div>';if(!arch.length)$('archiveList').innerHTML='<div class="empty" style="grid-column:1/-1">アーカイブは空っぽ</div>';}
+function renderStats(){const correct=history.filter(h=>h.correct);$('attempts').textContent=correct.length;if(correct.length){const times=correct.map(h=>h.seconds);$('avgTime').textContent=fmt(times.reduce((a,b)=>a+b,0)/times.length);$('bestTime').textContent=fmt(Math.min(...times));}else{$('avgTime').textContent='—';$('bestTime').textContent='—';}
+ const area=$('historyList');area.innerHTML='';if(!history.length){area.innerHTML='<div class="empty">まだ記録がないよ。練習してみよう！</div>';return;}history.slice(0,20).forEach(h=>{const row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px';const left=document.createElement('span');left.textContent=(h.mode===1?'① ':'② ')+h.name;const right=document.createElement('b');right.textContent=fmt(h.seconds);row.append(left,right);area.appendChild(row);});}
+$('clearStats').onclick=()=>{if(confirm('学習記録をリセットする？')){history=[];updateCounts();renderStats();}};
+async function refresh(){cakes=await allCakes();decks={1:[],2:[]};lastQuestionId={1:null,2:null};updateCounts();}
+function applyFont(font){
+ const clean=String(font||'').trim().replace(/[;{}]/g,'').replace(/["\\]/g,'');
+ if(clean){
+  document.documentElement.style.setProperty('--app-font','"'+clean+'", system-ui, sans-serif');
+  document.body.style.fontFamily='"'+clean+'", system-ui, sans-serif';
+  localStorage.setItem('cake-oboecho-font',clean);
+ }else{
+  document.documentElement.style.removeProperty('--app-font');
+  document.body.style.fontFamily='';
+  localStorage.removeItem('cake-oboecho-font');
+ }
+ $('fontPreview').style.fontFamily=clean?'"'+clean+'",system-ui,sans-serif':'system-ui,sans-serif';
+}
+function syncFontSettings(){
+ const saved=localStorage.getItem('cake-oboecho-font')||'';
+ const preset=$('fontPreset'),custom=$('customFont');
+ if([...preset.options].some(o=>o.value===saved)){preset.value=saved;custom.value='';}
+ else{preset.value='';custom.value=saved;}
+ if(saved){document.documentElement.style.setProperty('--app-font','"'+saved.replace(/["\\]/g,'')+'", system-ui, sans-serif');document.body.style.fontFamily='"'+saved.replace(/["\\]/g,'')+'", system-ui, sans-serif';}else{document.documentElement.style.removeProperty('--app-font');document.body.style.fontFamily='';}
+ $('fontPreview').style.fontFamily=saved?'"'+saved.replace(/["\\]/g,'')+'",system-ui,sans-serif':'system-ui,sans-serif';
+}
+$('applyFont').onclick=()=>applyFont($('customFont').value.trim()||$('fontPreset').value);
+$('resetFont').onclick=()=>{applyFont('');syncFontSettings();};
+$('fontPreset').addEventListener('change',()=>{$('customFont').value='';});
+$('customFont').addEventListener('input',()=>{if($('customFont').value.trim())$('fontPreset').value='';});
+const savedFont=localStorage.getItem('cake-oboecho-font');if(savedFont)applyFont(savedFont);
+(async()=>{try{db=await openDB();await refresh();renderLists();newQuestion();}catch(e){console.error(e);$('quizContent').innerHTML='<div class="empty">保存機能を開けなかったみたい。ブラウザで開き直してみてね。</div>';}})();
+})();
+</script>
+</body>
+</html>
